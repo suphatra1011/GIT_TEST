@@ -1,0 +1,11 @@
+Linux和Windows的換行字元
+getopt()來parsing command line的參數
+c語言中常見的錯誤以及中文解釋 https://read01.com/7JjG87.html#.Wz78DNUzaDJ
+linux下生成靜態庫和動態庫 https://read01.com/85PGGR.html#.Wz7_BtUzZ6s
+使用gcc自製 C/C++ 靜態、共享與動態載入函式庫教學 https://blog.gtwang.org/programming/howto-create-library-using-gcc/
+typedef struct vs struct definitions [duplicate] https://stackoverflow.com/questions/1675351/typedef-struct-vs-struct-definitions 
+ARM: How to write a bootloader - http://www.keil.com/support/docs/3913.htm
+C語言中auto，register，static，const，volatile 的區別  https://read01.com/nkBG.html
+
+VSCode下 搭建 ARM Cortex-M 开发环境 -- Part 0 开发工具安装 https://www.jianshu.com/p/32efe218e18f
+C語言初學者編程規範—命名規則 https://read01.com/zh-tw/kozE.html#.W6CgrM4zZ6t
