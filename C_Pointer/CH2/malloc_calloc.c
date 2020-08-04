@@ -10,7 +10,8 @@
     const unsigned char MAXSIZE=10;
 #endif
 
-void free_mem(unsigned char* ptr)
+//void free_mem(unsigned char* ptr)
+void free_mem(void *ptr)
 {
     if(ptr != NULL)
     {
@@ -43,11 +44,17 @@ int main()
         }
         
 //[TIPS-4]
-    #if 0
+    #if 1
         free(arrRspData); //To release memory
+        arrRspData=NULL;  
     #else
         free_mem(arrRspData);
     #endif
+        
+        if(arrRspData!=NULL)
+        {
+            printf("Fail to free memory.\r\n");
+        }
     }
     return 0;
 }
