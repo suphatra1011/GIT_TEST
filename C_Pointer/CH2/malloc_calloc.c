@@ -1,15 +1,30 @@
 #include <stdio.h>
 
-//Case-1
-//#define MAXSIZE 10
+//[TIPS-1]Suggest to use const to preprocessor.
+//Difference and advantages can refer https://www.jianshu.com/p/4d9f30abc3e9
+#if 1
+    //Case-1:Pre
+    #define MAXSIZE 10
+#else
+    //Case-2: Run-Time 
+    const unsigned char MAXSIZE=10;
+#endif
 
-//Case-2 To suggest the method to replace Case-1 pre-define
-const unsigned char MAXSIZE=10;
+void free_mem(unsigned char* ptr)
+{
+    if(ptr != NULL)
+    {
+        free(ptr);
+        ptr=NULL;
+    }
+}
 
+/*------- Main -------*/
 int main()
 {
     static unsigned char* arrRspData=NULL;
     
+//[TIPS-2]Usage: malloc/calloc
 #if 1
     //Case-1 
     arrRspData = (unsigned char*)malloc( MAXSIZE * sizeof(unsigned char));
@@ -19,12 +34,20 @@ int main()
     arrRspData = (unsigned char*)calloc( MAXSIZE, sizeof(unsigned char)); // memory allocation and init value 0
 #endif    
 
-    for(int Cnt=0;Cnt<MAXSIZE;Cnt++)
+//[TIPS-3]Confirm memory allocate sucessfully, to avoid memory leak or crash.
+    if( (arrRspData != NULL) && MAXSIZE !=0) 
     {
-        printf("arrRspData[%d]=%x\r\n",Cnt,arrRspData[Cnt]);
+        for(int Cnt=0;Cnt<MAXSIZE;Cnt++)
+        {
+            printf("arrRspData[%d]=%x\r\n",Cnt,arrRspData[Cnt]);
+        }
+        
+//[TIPS-4]
+    #if 0
+        free(arrRspData); //To release memory
+    #else
+        free_mem(arrRspData);
+    #endif
     }
-    
-    free(arrRspData); //To release memory
-    
     return 0;
 }
