@@ -48,7 +48,7 @@ int main()
         free(arrRspData); //To release memory
         arrRspData=NULL;  
     #else
-        free_mem(arrRspData);
+        free_mem((void*)arrRspData);
     #endif
         
         if(arrRspData!=NULL)
