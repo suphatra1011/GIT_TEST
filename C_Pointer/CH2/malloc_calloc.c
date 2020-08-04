@@ -44,7 +44,7 @@ int main()
         }
         
 //[TIPS-4]
-    #if 1
+    #if 0
         free(arrRspData); //To release memory
         arrRspData=NULL;  
     #else
