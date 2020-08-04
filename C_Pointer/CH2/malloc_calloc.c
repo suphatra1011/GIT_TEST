@@ -1,22 +1,21 @@
 #include <stdio.h>
 
-//[TIPS-1]Suggest to use const to preprocessor.
+//[TIPS-1]Use const to replace preprocessor - #define MAXSIZE 10.
 //Difference and advantages can refer https://www.jianshu.com/p/4d9f30abc3e9
-#if 1
-    //Case-1:Pre
-    #define MAXSIZE 10
-#else
-    //Case-2: Run-Time 
-    const unsigned char MAXSIZE=10;
-#endif
+const unsigned char MAXSIZE=10;
 
-//void free_mem(unsigned char* ptr)
+
+void delay(int x)
+{
+    for (int i = 0; i < 10; i++) ;
+}
+
 void free_mem(void *ptr)
 {
     if(ptr != NULL)
     {
         free(ptr);
-        ptr=NULL;
+        ptr=NULL; //To avoid dangling pointer.
     }
 }
 
@@ -43,16 +42,15 @@ int main()
             printf("arrRspData[%d]=%x\r\n",Cnt,arrRspData[Cnt]);
         }
         
-//[TIPS-4]
-    #if 0
-        free(arrRspData); //To release memory
-        arrRspData=NULL;  
-    #else
+//[TIPS-4]To avoid double free
         free_mem((void*)arrRspData);
-    #endif
         
         if(arrRspData!=NULL)
         {
+            for(int Cnt=0;Cnt<MAXSIZE;Cnt++)
+            {
+               printf("Data[%d]=%x\r\n",Cnt,arrRspData[Cnt]);
+            }
             printf("Fail to free memory.\r\n");
         }
     }
