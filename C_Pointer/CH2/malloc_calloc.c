@@ -23,5 +23,8 @@ int main()
     {
         printf("arrRspData[%d]=%x\r\n",Cnt,arrRspData[Cnt]);
     }
+    
+    free(arrRspData); //To release memory
+    
     return 0;
 }
