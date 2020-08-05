@@ -1,0 +1,126 @@
+
+####-- BMC ipmi oem cmd format --####
+ipmitool -H {ip} -U admin -P admin raw 0x38 0xee {board_id} {CmdCode/FuncCode} {datas}
+####-- Exp iicw/iicwr cmd format --####
+iicw {Exp_SlaveAddr} {i2c_BusNum} {CmdCode/FuncCode} {byteCnt} {SeqNum} {Datas} {PEC}
+
+
+------------------------------------------------------------------------------------------------
+## -- Get Sensor Reading -- ## 
+ipmitool -H 127.0.0.1 -U admin -P admin raw 0x38 0xee 3 1 0
+iicw e2 0 1 3 47 0 64
+iicwr e2 0 8 1
+
+
+
+## -- Read Fru -- ## 
+ipmitool -H 127.0.0.1 -U admin -P admin raw 0x38 0xee 3 2 0 0 0 4
+iicw e2 0 2 6 47 0 0 0 5 9E
+iicwr e2 0 8 2
+
+
+## -- Write Fru -- ##
+ipmitool -H 127.0.0.1 -U admin -P admin raw 0x38 0xee 3 3 0 0 0 4 5 6 7
+iicw e2 0 3 9 47 0 0 0 4 5 6 7 F9
+iicwr e2 0 5 3
+iicwr aa 1 5 0 0
+
+## -- Get GPIO configuration -- ##
+ipmitool -H 127.0.0.1 -U admin -P admin raw 0x38 0xee 3 0x08
+iicw e2 0 2 6 47 0 0 0 5 9E
+iicwr e2 0 8 2
+
+
+## -- Set GPIO configuration -- ## (Heartbeat at bit-1)
+ipmitool -H 127.0.0.1 -U admin -P admin raw 0x38 0xee 0 0x09 0x0 0x1 0x0
+ipmitool -H 127.0.0.1 -U admin -P admin raw 0x38 0xee 3 0x09 0x0 0x1 0x1   
+ipmitool -H 127.0.0.1 -U admin -P admin raw 0x38 0xee 3 0x09 0x0 0x0 0x0
+ipmitool -H 127.0.0.1 -U admin -P admin raw 0x38 0xee 3 0x09 0x0 0x0 0x1
+ipmitool -H 127.0.0.1 -U admin -P admin raw 0x38 0xee 3 0x09 0x0 0x0 0x1
+ipmitool -H 127.0.0.1 -U admin -P admin raw 0x38 0xee 3 0x09 0x0 0x0 0x1
+
+Check direction status : mr32 0x40400010 
+check output status : mr32 0x40400014
+
+iicw e2 0 9 5 47 0 1 0 B0
+iicw e2 0 9 5 47 0 1 1 B7
+iicw e2 0 9 5 47 0 0 0 A5
+iicw e2 0 9 5 47 0 0 1 A2
+iicw e2 0 9 5 47 F 1 1 F0
+iicw e2 0 9 5 47 F 1 0 F7
+iicwr e2 0 3 9
+
+## -- Get Expander Info   -- ##
+ipmitool -H 127.0.0.1 -U admin -P admin raw 0x38 0xee 3 0xA 0x0
+iicw e2 0 A 3 46 0 FB
+iicwr e2 0 3 9
+
+## -- Get Drive Status -- ##
+ipmitool -H 127.0.0.1 -U admin -P admin raw 0x38 0xee 3 0x0b
+iicw e2 0 B 2 47 5C
+iicwr e2 0 32 B
+
+
+## -- Get Drive Temperature -- ##
+ipmitool -H 127.0.0.1 -U admin -P admin raw 0x38 0xee 3 0x0c
+iicw e2 0 C 2 47 4A
+iicwr e2 0 32 C
+
+
+## -- Get Link Error Count  -- ##
+ipmitool -H 127.0.0.1 -U admin -P admin raw 0x38 0xee 3 0x0d 0x17 0
+iicw e2 0 D 4 47 17 0 F3
+iicwr e2 0 21 D
+
+
+## -- Drive Power Control  -- ##
+ipmitool -H 127.0.0.1 -U admin -P admin raw 0x38 0xee 3 0x0e 1 1
+iicw e2 1 E 4 47 1 1 7B
+iicwr e2 1 4 E
+
+
+## -- Drive Power Status  -- ##
+ipmitool -H 127.0.0.1 -U admin -P admin raw 0x38 0xee 3 0x0f
+iicw e2 0 F 2 47 F7
+iicwr e2 0 32 F
+
+
+## -- Master Write-Read -- ##
+iicw e2 0 10 b 47 30 aa 0 0 0 1 22 33 44 e9
+iicwr e2 0 32 10
+iicwr aa 1 10 00 00
+
+
+## -- Master Write-Read -- ##
+ipmitool -H 127.0.0.1 -U admin -P admin raw 0x38 0xee 3 0x13 0x31
+iicw e2 0 13 3 47 ff dc
+iicwr e2 0 3 13
+
+
+## -- Toggle Drive Repair LED -- ##
+iicw e2 0 14 4 47 1 1 94
+iicwr e2 0 4 14
+
+
+## -- Set FAN sensor status -- ##
+ipmitool -H 127.0.0.1 -U admin -P admin raw 0x38 0xee 3 0x15 0xAA 0x55 0xAA 0x55 0xAA 0x55 0xAA 0x55 0xAA 0x55 0xAA 0x55 0xAA 0x55 0xAA 0x55 0xAA 0x55 0xAA 0x55 0xAA 0x55 0xAA 0x55 0xAA 0x55 0xAA 0x55 0xAA 0x55 0xAA 0x55 0x1 0x0 0x1 0x0 0x1 0x0 0x1 0x0 0x1 0x0 0x1 0x0 0x1 0x0 0x1 0x0
+
+
+
+## -- Get Expander Status -- ##
+iicw e2 0 A0 2 47 F8/iicw e2 0 A0 2 47 F8
+iicwr e2 0 3 16
+
+//iicw-cwr on eeprom
+iicwr aa 1 3 2 69  / iicwr ae 1 3 2 69
+iicw aa 1 2 69 0 0 0 / iicw ae 1 2 69 ff ff ff
+
+
+## -- Set Service Mode Switch State -- ##
+iicw e2 1 A1 3 47 1 9C
+iicwr e2 1 3 A1
+
+
+## -- Get Async logs event -- ##
+iicw e2 1 A6 2 47 85
+iicwr e2 1 7 A6
