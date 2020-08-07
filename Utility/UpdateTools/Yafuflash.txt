@@ -1,0 +1,8 @@
+Yafuflash command:
+Linux 	: ./Yafuflash -nw -ip <BMC IP> -u admin -p admin -netfn 0x34 -d <FW_code> <Fw Image path>
+Windows : Yafuflash.exe -nw -ip <BMC IP> -u admin -p admin -netfn 0x34 -d <FW_code> <Fw Image path>
+FW_code : 1=>BMC , 4=>CPLD
+When user update Firmware by Yafuflash please add “ -netfn 0x34 ” because AMI default OEM Netfn change to 0x34. 
+example(windows):
+BMC update : Yafuflash.exe -nw -ip <BMC IP> -u admin -p admin -netfn 0x34 -d 1 <BMC  Image>
+CPLD update: Yafuflash.exe -nw -ip <BMC IP> -u admin -p admin -netfn 0x34 -d 4 <CPLD Image> 
