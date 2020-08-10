@@ -1,0 +1,15 @@
+Memset(byte為主) ->除了0x0跟0xff 之外的值.不可使用
+
+1.Copy 相同長度
+2.做init (allbit-0/1)
+
+
+
+Big/little endian
+
+Network(big endian) ->ntol
+
+
+#pragma pack(1) -> Struct alias
+
+Wirte Header file first -> Can help framework logic 
