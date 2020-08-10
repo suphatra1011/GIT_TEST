@@ -1,0 +1,14 @@
+Y1 HBA/arch by shell srcipt
+       ROM
+       
+Y2 mcp/vr driver lib/app by C
+  mcu hal  by C + python
+     i2c 
+     eeprom
+     sgpio
+     HDMI CEC
+     
+Y3 Redfish/yocto/yaml/IPC
+
+Y4 network by C/python
+      PCIE/SAS
