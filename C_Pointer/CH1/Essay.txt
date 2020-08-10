@@ -1,0 +1,30 @@
+指標相減 ->取得字串大小
+比較指標(sizeof) ->長度.
+
+二維Array 計算資料Count
+
+連續
+
+---------------------
+
+.bss
+.data (global/static init) ->執行檔較大, 
+
+#define MAX_SIZE 512   -> Compiler 會預處理做展開(前置處理, 與runtime時看到的code可能不同)
+const int MAX_SIZE =512;  -> 推薦使用 , 效果與前者相同.(runtime)
+
+
+----------------------
+以前 function存取struct 
+建議 物件導向 
+
+Define struct
+Define function pointer
+-----------------------
+
+把static 變數 放在function
+
+static int & s_id()
+{
+	return 
+}
