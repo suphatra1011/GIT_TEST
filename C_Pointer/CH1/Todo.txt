@@ -1,0 +1,4 @@
+1.NULL
+2.Predefined Pointer-Related Types(ptrdiff_t/intptr_t/uintprt_t) -> define at <stddef.h> 
+>> Refer https://www.gnu.org/software/libc/manual/html_node/Important-Data-Types.html
+3.Constant pointers
