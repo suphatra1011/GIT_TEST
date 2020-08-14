@@ -1,0 +1,6 @@
+__attribute__((packed))
+
+定義物件.屬性
+
+把class_name
+<> : Template 
