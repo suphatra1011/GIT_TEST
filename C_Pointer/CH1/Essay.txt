@@ -1,5 +1,5 @@
 指標相減 ->取得字串大小
-比較指標(sizeof) ->長度.
+比較指標(sizeof) ->長度.  (%zu, %u , %lu)
 
 二維Array 計算資料Count
 
