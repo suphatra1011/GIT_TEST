@@ -1,5 +1,6 @@
 #include <stdio.h>
-
+#include <stdlib.h> //free
+#include <string.h> //memset
 //[TIPS-1]Use const to replace preprocessor - #define MAXSIZE 10.
 //Difference and advantages can refer https://www.jianshu.com/p/4d9f30abc3e9
 const unsigned char MAXSIZE=10;
@@ -10,12 +11,12 @@ void delay(int x)
     for (int i = 0; i < 10; i++) ;
 }
 
-void free_mem(void *ptr)
+void free_mem(void** ptr)   //data context
 {
-    if(ptr != NULL)
+    if((ptr != NULL) && (*ptr != NULL)) //pointer address & pointer context
     {
-        free(ptr);
-        ptr=NULL; //To avoid dangling pointer.
+        free(*ptr);
+        *ptr=NULL; //To avoid dangling pointer.
     }
 }
 
@@ -43,7 +44,7 @@ int main()
         }
         
 //[TIPS-4]To avoid double free
-        free_mem((void*)arrRspData);
+        free_mem((void**)&arrRspData);
         
         if(arrRspData!=NULL)
         {
