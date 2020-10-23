@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import sys , os , binascii
+import sys , os , zlib #binascii
 def parse_argv(): 
     if len(sys.argv) != 2:
         sys.exit('Usage: %s {filename}' % os.path.basename(sys.argv[0]))
@@ -16,7 +16,7 @@ def computeFileCRC(fname):
         content = f.read(blocksize)
         crc = 0
         while len(content) != 0:
-            crc = binascii.crc32(content,crc) & 0xffffffff
+            crc = zlib.crc32(content,crc) & 0xffffffff
             content = f.read(blocksize)
         f.close()
     except:
